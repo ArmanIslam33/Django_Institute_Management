@@ -1,0 +1,16 @@
+{% extends "master/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{{title}} | Institute Management{% endblock title %}
+{% block content %}
+    <h1>{{heading}}</h1>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_data | crispy }}
+
+
+        <button type="submit" class="btn btn-success">{{btn}}</button>
+
+    </form>
+
+{% endblock content %}
