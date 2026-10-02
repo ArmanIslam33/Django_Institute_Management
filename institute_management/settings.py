@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'auth_user',
     'Student',
     'Course',
+    'Teacher',
     
     "crispy_forms",
     "crispy_bootstrap5",
