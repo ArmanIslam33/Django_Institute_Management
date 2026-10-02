@@ -68,3 +68,74 @@ def delete_course_category(request,id):
     data.delete()
     messages.success(request,'Course Category Deleted Successfully!')
     return redirect('course_category')
+
+# =======> Course Page
+
+def course_page(request):
+    
+    datas = CourseModel.objects.all()
+    
+    context = {
+        'datas' : datas
+    }
+    
+    return render(request,'course/course.html',context)
+
+
+def add_course(request):
+    
+    form_data = CourseForm()
+    
+    if request.method == 'POST':
+        form_data = CourseForm(request.POST,request.FILES)
+        
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request,'Course Created Successfully!')
+            return redirect('course_page')
+    
+    
+    context = {
+        'form_data' : form_data,
+        'title' : 'Add Course',
+        'heading' : 'Add Course Page!',
+        'btn' : 'Add Course'
+    }
+    
+    return render(request,'master/base_form.html',context)
+
+
+def update_course(request,id):
+    
+    data = get_object_or_404(CourseModel,id=id)
+    
+    form_data = CourseForm(instance=data)
+    
+    if request.method == 'POST':
+        form_data = CourseForm(request.POST,request.FILES,instance=data)
+        
+        if form_data.is_valid():
+            form_data.save()
+            messages.success(request,'Course Updated Successfully!')
+            return redirect('course_page')
+    
+    
+    context = {
+        'form_data' : form_data,
+        'title' : 'Update Course',
+        'heading' : 'Update Course Page!',
+        'btn' : 'Update Course'
+    }
+    
+    return render(request,'master/base_form.html',context)
+
+
+def delete_course(request,id):
+    
+    data = get_object_or_404(CourseModel,id=id)
+    data.delete()
+    messages.success(request,'Course Deleted Successfully!')
+    return redirect('course_page')
+    
+
+

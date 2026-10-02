@@ -10,7 +10,7 @@ class StudentForm(forms.ModelForm):
     
     class Meta:
         model = StudentModel
-        fields = '__all__'
+        fields = ['name','username','email','phone','roll_no','address','image']
         exclude = ['user']
         
     @transaction.atomic   

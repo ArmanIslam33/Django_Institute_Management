@@ -1,0 +1,45 @@
+{% extends 'master/base.html' %}
+{% block title %}
+  Course Page | Institute Management
+{% endblock %}
+{% block content %}
+  <h1>Course Page</h1>
+  <a href="{% url 'add_course' %}" class="btn btn-info my-2">Add Course</a>
+
+  <table class="table table-success table-striped">
+    <thead>
+      <tr>
+        <th>Thumbnail</th>
+        <th>Title</th>
+        <th>Course Fee</th>
+        <th>Catagory</th>
+        <th>Duration</th>
+        <th>Created By</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for data in datas %}
+        <tr>
+          <td>
+            {% if data.thumbnail %}
+              <img src="{{ data.thumbnail.url }}" alt="" height="50px"/>
+            {% else %}
+              <p class="text-danger">No Image Found!</p>
+            {% endif %}
+          </td>
+          <td>{{ data.title }}</td>
+          <td>{{ data.course_fee }}</td>
+          <td>{{ data.category }}</td>
+          <td>{{ data.duration }}</td>
+          <td>{{ data.created_by }}</td>
+          <td>
+            <a href="{% url 'update_course' data.id %}" class="btn btn-success">Update</a>
+            <a href="{% url 'delete_course' data.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
